@@ -1,0 +1,31 @@
+﻿#pragma once
+#include <memory>
+#include <vector>
+
+#include "PreguntaBase.h"
+
+class Prueba
+{
+private:
+	int Dev_PreguntasDefault = 1;
+	std::vector<std::unique_ptr<PreguntaBase>> lista_preguntas;
+public:
+	Prueba();
+
+	// Menu
+	std::vector<std::unique_ptr<PreguntaBase>>& getListaPreguntas();
+	int menuPedirOpcion();
+	void generarPregunta();
+	void mostrarPreguntas();
+	void actualizarPrueba();
+	void borrarPregunta();
+	void consultarItem();
+	void consultarPorTaxonomia();
+	int tiempoPrueba();
+	void iniciarPrueba();
+	void Dev_crearPreguntasManual();
+
+	//Utils
+	std::string getTaxNameByInt(int taxonomia);
+
+};
