@@ -61,4 +61,6 @@ std::string PreguntaBase::ReturnTaxName(Taxonomia taxonomia)
 	case EVALUAR: return "Evaluar";
 	case CREAR: return "Crear";
 	}
+
+	return "Error";
 }

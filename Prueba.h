@@ -4,10 +4,14 @@
 
 #include "PreguntaBase.h"
 
+#ifndef Dev_PreguntasPrueba
+#define Dev_PreguntasPrueba 0
+#endif
+
 class Prueba
 {
 private:
-	int Dev_PreguntasDefault = 1;
+	int Dev_PreguntasDefault;
 	std::vector<std::unique_ptr<PreguntaBase>> lista_preguntas;
 public:
 	Prueba();

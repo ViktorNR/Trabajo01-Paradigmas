@@ -398,6 +398,8 @@ FodyWeavers.xsd
 *.sln.iml
 
 #Custom
+*.vcxproj.filters
+*.vcxproj.user
 *.vcxproj
 *.filters
 *.lastbuildstate
@@ -406,3 +408,4 @@ FodyWeavers.xsd
 *.log
 *.recipe
 *.ilk
+*.user

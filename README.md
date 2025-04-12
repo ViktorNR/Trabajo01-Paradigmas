@@ -1,2 +1,8 @@
-# Trabajo01Paradigmas
- Repo para el primer trabajo de paradigmas; tercer año, primer semestre.
+# LEER POR FAVOR
+Existen preguntas que se pueden agregar manualmente.
+ 
+##Para compilar con preguntas ya agregadas de testeo:
+g++ *.cpp -DDev_PreguntasPrueba=1 -o tarea.exe
+
+##Para compilar nomral
+g++ *.cpp -o tarea.exe

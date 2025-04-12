@@ -7,6 +7,7 @@
 
 #define separador "<-------------------------------------------------->"
 
+
 Prueba::Prueba()
 {
 	iniciarPrueba();
@@ -581,7 +582,7 @@ int Prueba::tiempoPrueba()
 
 void Prueba::iniciarPrueba()
 {
-    if (Dev_PreguntasDefault == 1)
+    if (Dev_PreguntasPrueba == 1)
     {
         Dev_crearPreguntasManual();
         std::cout << "PREGUNTAS MANUALES POR DEFAULT ACTIVADAS!" << std::endl;
@@ -589,7 +590,7 @@ void Prueba::iniciarPrueba()
     }
     else
     {
-        std::cout << "Dev: existen preguntas de testeo que se agregan automaticamente, para anadirlas cambie Dev_PreguntasDefault a 1 dentro de Prueba.h" << std::endl;
+        std::cout << "Dev: existen preguntas de testeo que se agregan automaticamente, para agregarlas escriba: 'g++ *.cpp -DDev_PreguntasPrueba=1 -o tarea.exe' al compilar" << std::endl;
     }
 
     int opcion = 0;
@@ -776,4 +777,5 @@ std::string Prueba::getTaxNameByInt(int taxonomia)
     case EVALUAR: return "EVALUAR";
     case CREAR: return "CREAR";
     }
+    return "Error";
 }
