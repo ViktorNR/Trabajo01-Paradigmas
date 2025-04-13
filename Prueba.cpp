@@ -28,7 +28,7 @@ int Prueba::menuPedirOpcion()
     bool valido = false;
 
     // Asegurar que se repitan las opciones hasta que se escoja una válida.
-    while (!valido || opcion < minimo || opcion > maximo) {
+    while (!valido) {
 
         std::cout << "\nMenu de opciones:\n";
         std::cout << ("1. Crear item.\n");
@@ -40,7 +40,7 @@ int Prueba::menuPedirOpcion()
         std::cout << ("7. Calcular tiempo total de prueba. \n");
         std::cout << ("8. Salir.\n\n");
 
-        std::cout << "Ingrese opcion (entero entre 1 y 6): ";
+        std::cout << "Ingrese opcion (entero entre 1 y 8): ";
 
         std::cin >> opcion;
 
@@ -49,7 +49,14 @@ int Prueba::menuPedirOpcion()
         //while (getchar() != '\n');
 
         // Si la opción no es válida, informar al ususario.
-        if (opcion < minimo || opcion > maximo) {
+
+        if(std::cin.fail())
+        {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Entrada invalida. Por favor ingrese un numero entero.\n";
+        }
+        else if (opcion < minimo || opcion > maximo) {
             std::cout << "La opcion ingresada no es valida. \n";
         }
         else valido = true;
