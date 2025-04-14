@@ -44,12 +44,8 @@ int Prueba::menuPedirOpcion()
 
         std::cin >> opcion;
 
-        // Limpiar entrada estándar para que no quede el salto de línea
-        // residual.
-        //while (getchar() != '\n');
 
-        // Si la opción no es válida, informar al ususario.
-
+        // Si la opción no es valida, informar al ususario.
         if(std::cin.fail())
         {
             std::cin.clear();
@@ -99,7 +95,7 @@ void Prueba::generarPregunta()
         std::cin >> tipo_pregunta;
     }
 
-
+    // Asegurandonos de que el input este limpio...
     std::cin.clear();
     std::cin.sync();
     std::cin.ignore();
@@ -113,13 +109,12 @@ void Prueba::generarPregunta()
         // Una alternativa por letra (a - e)
         for (const char letra : letras)
         {
-            std::cout << "Escriba la pregunta para la alternativa '" << letra << "': ";
+            std::cout << "Escriba el enunciado de la alternativa '" << letra << "': ";
             std::getline(std::cin, alternativa);
             alternativas.insert({ letra, alternativa });
         }
-        // Hacer que escoja la alternativa correcta.
 
-
+    	// Hacer que escoja la alternativa correcta.
         // Mostrar las alternativas para que se elija la correcta.
         for (auto alternativa : alternativas)
         {
@@ -138,10 +133,11 @@ void Prueba::generarPregunta()
     // Verdadero o Falso.
     else
     {
-        // Que pasa si ingresa un valor que no sea ni V o F??? Hay que arreglarlo!
+       
         std::cout << "Ingrese si el enunciado es verdero (V) o falso (F): ";
         std::cin >> vof;
 
+        // Convertir input a mayuscula
         vof = std::toupper(vof);
         while (vof != 'V' && vof != 'F')
         {
@@ -227,7 +223,7 @@ void Prueba::actualizarPrueba()
             return;
         }
 
-        // Abajo de == 0,sino da nullptr
+        // Abajo de == 0, sino da nullptr
         PreguntaSeleccion* pregunta_seleccion = dynamic_cast<PreguntaSeleccion*>(this->lista_preguntas[indice_pregunta].get());
         PreguntaVF* pregunta_vf = dynamic_cast<PreguntaVF*>(this->lista_preguntas[indice_pregunta].get());
 
@@ -244,6 +240,8 @@ void Prueba::actualizarPrueba()
         std::cin.ignore();
         std::cin >> actualizar;
 
+
+        // Por si el usuario quiere acceder a la justifiacion de un enunciado Verdadero...
         if (actualizar == 5 && std::tolower(pregunta_vf->getVoF()) == 'v')
         {
             std::cout << "Los enunciados Verdaderos no tienen justificacion, intente de nuevo..." << std::endl;
@@ -274,7 +272,7 @@ void Prueba::actualizarPrueba()
                 break;
 	        }
       
-
+		// Cambiar taxonomia
         case 2:
             std::cout << "1. RECORDAR" << "\n";
             std::cout << "2. ENTENDER" << "\n";
@@ -304,6 +302,7 @@ void Prueba::actualizarPrueba()
             std::cout << "Taxonomia cambiada con exito!" << std::endl;
             break;
 
+		// Cambiar duracion
         case 3:
             float duracion;
             std::cout << "Ingrese la nueva duracion de la pregunta (en segundos): ";
@@ -319,6 +318,7 @@ void Prueba::actualizarPrueba()
             std::cout << "Duracion cambiada con exito!" << std::endl;
             break;
 
+		// Cambiar alternativa(s)
         case 4:
         {
             if (pregunta_seleccion)
@@ -402,7 +402,7 @@ void Prueba::actualizarPrueba()
         }
 
 
-
+		// Cambiar alternativa correcta o justificacion.
         case 5:
             char correcta;
             char letras[] = { 'a', 'b', 'c', 'd', 'e' };
@@ -583,7 +583,13 @@ int Prueba::tiempoPrueba()
         tiempoTotal += pregunta->getDuracion();
     }
 
-    return tiempoTotal;
+    int totalSegundos = static_cast<int>(tiempoTotal);
+    int minutos = totalSegundos / 60;
+    int segundos = totalSegundos % 60;
+
+    std::cout << "La prueba deberia tardar: " << minutos << " minutos y " << segundos << " segundos." << std::endl;
+
+    return totalSegundos;
 }
 
 
@@ -636,7 +642,7 @@ void Prueba::iniciarPrueba()
             break;
 
         case 7:
-            std::cout << "El tiempo total de la prueba es de: " << tiempoPrueba() / 60 << " minutos. \n";
+            tiempoPrueba();
             break;
 
         case 8:
@@ -648,6 +654,7 @@ void Prueba::iniciarPrueba()
     }
 }
 
+// Preguntas de prueba...
 void Prueba::Dev_crearPreguntasManual()
 {
     this->lista_preguntas.push_back(std::make_unique<PreguntaSeleccion>(
